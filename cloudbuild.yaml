@@ -18,7 +18,7 @@ steps:
           '--platform', 'managed',
           #'--no-traffic',
           '--set-env-vars', 'LCP=QA',
-          '--revision-suffix', 'V1',
+          '--revision-suffix', 'v1',
           '--allow-unauthenticated']
     id: DEPLOY
 
