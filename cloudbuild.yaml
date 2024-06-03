@@ -2,23 +2,23 @@ steps:
 
   # Build app
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:v1', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:v2', '.']
     id: BUILD
 
   # Storage of the image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:v1']
+    args: ['push', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:v2']
     id: STORAGE
 
   # Deploy
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'hello',
-          '--image', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:v1',
+          '--image', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:v2',
           '--region', 'us-central1',
           '--platform', 'managed',
-          #'--no-traffic',
+          '--no-traffic',
           '--set-env-vars', 'LCP=QA',
-          '--revision-suffix', 'v1',
+          '--revision-suffix', 'v2',
           '--allow-unauthenticated']
     id: DEPLOY
 
@@ -26,5 +26,5 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'services', 'update-traffic', 'hello',
           '--region', 'us-central1',
-          '--to-revisions=LATEST=100']
+          '--to-revisions=LATEST=50']
     id: CANARY

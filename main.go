@@ -10,7 +10,7 @@ import (
 var APP *gin.Engine
 
 func getHomePageHandler(context *gin.Context) {
-	context.JSON(http.StatusOK, gin.H{"status": "hey it is up from V1!"})
+	context.JSON(http.StatusOK, gin.H{"status": "hey it is up from V2!"})
 }
 
 func main() {
