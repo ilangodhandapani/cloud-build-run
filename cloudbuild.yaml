@@ -20,7 +20,7 @@ steps:
           '--allow-unauthenticated']
     id: DEPLOY
 
-  # Canary
+  # Canary 
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'services', 'update-traffic', 'hello-site',
           '--region', 'us-east1',
