@@ -16,7 +16,7 @@ steps:
           '--image', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:latest',
           '--region', 'us-central1',
           '--platform', 'managed',
-          #'--no-traffic',
+          '--no-traffic',
           '--set-env-vars', 'LCP=QA',
           '--allow-unauthenticated']
     id: DEPLOY
@@ -25,5 +25,5 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'services', 'update-traffic', 'hello',
           '--region', 'us-central1',
-          '--to-revisions=LATEST=100']
+          '--to-revisions=LATEST=50']
     id: CANARY
