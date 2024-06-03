@@ -2,22 +2,23 @@ steps:
 
   # Build app
   - name: 'gcr.io/cloud-builders/docker'
-    #args: ['build', '-t', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:latest', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:v1', '.']
     id: BUILD
 
   # Storage of the image
   - name: 'gcr.io/cloud-builders/docker'
-    #args: ['push', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:latest']
+    args: ['push', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:v1']
     id: STORAGE
 
   # Deploy
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'deploy', 'hello',
-          '--image', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:latest',
+          '--image', 'us-central1-docker.pkg.dev/flawless-lacing-392113/my-app-repo/hello:v1',
           '--region', 'us-central1',
           '--platform', 'managed',
-          '--no-traffic',
+          #'--no-traffic',
           '--set-env-vars', 'LCP=QA',
+          '--revision-suffix', 'V1'
           '--allow-unauthenticated']
     id: DEPLOY
 
