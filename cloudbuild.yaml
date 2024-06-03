@@ -26,5 +26,5 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['run', 'services', 'update-traffic', 'hello',
           '--region', 'us-central1',
-          '--to-revisions=LATEST=50']
+          '--to-revisions=LATEST=100']
     id: CANARY
